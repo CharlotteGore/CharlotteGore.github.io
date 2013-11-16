@@ -1,0 +1,415 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Charlotte Gore on Github by CharlotteGore</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/CharlotteGore">View On GitHub</a></li>
+        </nav>
+      </div><!-- end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>Charlotte Gore on Github</h1>
+          <p>An executive contextualised summary of repositories</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/CharlotteGore">CharlotteGore</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
+
+        <h2>
+<a name="javascript-components" class="anchor" href="#javascript-components"><span class="octicon octicon-link"></span></a>Javascript Components</h2>
+
+<p>First up, <a href="http://component.io">Components</a>. Component is a package manager for CommonJS style modules for browsers. Most of the code I write these days is in this style. It helps separate functionality into discrete, testable modules. </p>
+
+<h3>
+<a name="hyperbone" class="anchor" href="#hyperbone"><span class="octicon octicon-link"></span></a>Hyperbone</h3>
+
+<p>Strictly speaking this is on a different Github account, but for the sake of completeness, Hyperbone is a Hypermedia Framework built on Backbone with a significantly better built in view engine for binding models directly to the DOM (it is more like Angular in that respect).</p>
+
+<p>In a way the fancy evented models and view-model binding is sort of a bonus. The real power comes in terms of defining 'commands' to interact with a web service. This commands can come directly from a Hypermedia API (REST Level 3) or they can be defined as defaults for your models in the client to define server side interactions in advance of the server side being developed or to consume a non-RESTful or non Hypermedia API without needing to change the client side design pattern.</p>
+
+<p>It's still in heavy active development and some of the implications of the focus on Hypermedia are only just becoming apparent to me. The TODOMVC app has been implemented with Hyperbone <a href="https://github.com/green-mesa/todomvc-hyperbone">here</a> with a live demo <a href="http://charlottegore.com/todomvc">here</a>.</p>
+
+<p>I'd argue that this isn't quite ready for public use yet but it's getting there.</p>
+
+<p>At the moment there's no one single Hyperbone Component, so I'll link to the individual repos for now:</p>
+
+<p>Evented Hypermedia model:<br><a href="https://github.com/green-mesa/hyperbone-model">Hyperbone Model</a><br>
+Covered by tests? <strong>Yes</strong></p>
+
+<p>Bind Hypermedia models to the DOM for realtime updates and Hyperbone event triggering:<br><a href="https://github.com/green-mesa/hyperbone-view">Hyperbone View</a><br>
+Covered by tests? <strong>Yes</strong></p>
+
+<p>Extend Hyperbone View to add bindings for forms to <code>_commands</code>:<br><a href="https://github.com/green-mesa/hyperbone-view-commands">Hyperbone View Commands</a><br>
+Covered by tests? <strong>Yes</strong></p>
+
+<h3>
+<a name="tween" class="anchor" href="#tween"><span class="octicon octicon-link"></span></a>Tween</h3>
+
+<p>Tween morphs values from start to end over time. You can even morph '#FF0000' to '#F8E423' if you like. It has a fluent interface and makes use of other components I've written to perform easing on the morphs using bezier curves. It can even emulate CSS3 easing.</p>
+
+<div class="highlight highlight-js"><pre><span class="kd">var</span> <span class="nx">tween</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'tween'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">animation</span> <span class="o">=</span> <span class="nx">tween</span><span class="p">({</span> <span class="nx">x</span> <span class="o">:</span> <span class="mi">10</span><span class="p">,</span> <span class="nx">y</span> <span class="o">:</span> <span class="mi">10</span> <span class="p">})</span>
+  <span class="p">.</span><span class="nx">to</span><span class="p">({</span> <span class="nx">x</span> <span class="o">:</span> <span class="mi">100</span><span class="p">,</span> <span class="nx">y</span> <span class="o">:</span> <span class="mi">200</span> <span class="p">})</span>
+  <span class="p">.</span><span class="kd">with</span><span class="p">(</span><span class="s1">'ease-in'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">duration</span><span class="p">(</span><span class="s1">'5s'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">tick</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span> <span class="nx">tweenObject</span> <span class="p">){</span>
+     <span class="c1">// note computeMatrix3D doesn't come with Tween.</span>
+     <span class="nx">myElement</span><span class="p">.</span><span class="nx">style</span><span class="p">[</span><span class="s1">'-webkit-transform'</span><span class="p">]</span> <span class="o">=</span> <span class="nx">computeMatrix3D</span><span class="p">(</span> <span class="nx">tweenObject</span> <span class="p">);</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="nx">play</span><span class="p">()</span>
+</pre></div>
+
+<p>I've used this module for animation and creating gain envelopes for Web Audio. It's useful whenever you need to change any value over time with a specific easing curve.</p>
+
+<p><a href="https://github.com/CharlotteGore/Tween">Tween</a><br>
+Covered by tests? <strong>Yes</strong></p>
+
+<h3>
+<a name="easing" class="anchor" href="#easing"><span class="octicon octicon-link"></span></a>Easing</h3>
+
+<p>Normalised Cubic-bezier based easing generator. Given a particular easing curve it computes a value between 0 and 1 for a given time (also a number between 0 and 1).</p>
+
+<p>It has presets, a css3 easing emulation (where the eased value is generated by moving along the x axis of the curve at a linear speed and reading where the y axis intersects) and the patently useless Einstein mode (where the eased value is generated by moving along <em>the curve</em> at a linear speed and reading where the y axis intersects which tends to produce much more subtle effects and bizarre effects. </p>
+
+<p>The main difference is that an Einstein mode custom curve can be any arbitrary curve - it does not have to start at 0,0 and end at 1.1. It probably should though.</p>
+
+<p>It has a fluent interface, but it's a little clumsy to my eyes these days.</p>
+
+<div class="highlight highlight-js"><pre>
+<span class="c1">// presets</span>
+<span class="kd">var</span> <span class="nx">myEaser</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'easing'</span><span class="p">).</span><span class="nx">Ease</span><span class="p">().</span><span class="nx">using</span><span class="p">(</span><span class="s2">"ease-in"</span><span class="p">);</span>
+<span class="nx">myEaser</span><span class="p">(</span><span class="mf">0.5</span><span class="p">);</span>
+<span class="c1">// 0.3147198334560001</span>
+
+<span class="c1">// css3 emulation</span>
+<span class="kd">var</span> <span class="nx">myEaser</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'easing'</span><span class="p">).</span><span class="nx">Ease</span><span class="p">().</span><span class="nx">usingCSS3Curve</span><span class="p">(</span><span class="mf">0.33</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.305</span><span class="p">,</span> <span class="mf">0.715</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.155</span><span class="p">);</span>
+<span class="nx">myEaser</span><span class="p">(</span><span class="mf">0.5</span><span class="p">);</span>
+<span class="c1">// -0.06145341884495001</span>
+
+<span class="c1">// Einstein mode</span>
+<span class="nx">myEaser</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'easing'</span><span class="p">).</span><span class="nx">Ease</span><span class="p">().</span><span class="nx">usingCustomCurve</span><span class="p">({</span><span class="nx">c1</span> <span class="o">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="nx">c2</span><span class="o">:</span> <span class="p">[</span><span class="mf">0.075</span><span class="p">,</span> <span class="mf">0.61</span><span class="p">],</span> <span class="nx">c3</span><span class="o">:</span> <span class="p">[</span><span class="mf">0.36</span><span class="p">,</span> <span class="mf">0.93</span><span class="p">],</span> <span class="nx">c4</span><span class="o">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]})</span>
+<span class="c1">// 0.7025</span>
+</pre></div>
+
+<p><a href="https://github.com/CharlotteGore/easing">Easer</a><br>
+Covered by tests? <strong>Yes</strong></p>
+
+<h3>
+<a name="tick" class="anchor" href="#tick"><span class="octicon octicon-link"></span></a>Tick</h3>
+
+<p>Register callbacks to be run on browser animation frames. Do a global pause and resume. Pause, resume and stop individual handlers, too. This is surprisingly handy.</p>
+
+<div class="highlight highlight-js"><pre><span class="kd">var</span> <span class="nx">tick</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'tick'</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">handle</span> <span class="o">=</span> <span class="nx">tick</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">elapsed</span><span class="p">,</span> <span class="nx">stop</span><span class="p">){</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">elapsed</span> <span class="o">&gt;</span> <span class="mi">5000</span><span class="p">){</span>
+    <span class="nx">stop</span><span class="p">();</span> <span class="c1">// this callback won't fire again</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="nx">handle</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>
+<span class="nx">tick</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>
+<span class="nx">tick</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
+</pre></div>
+
+<p><a href="https://github.com/CharlotteGore/tick">Tick</a><br>
+Covered by tests? No. This was tested manually as the test framework I was using at the time wasn't good enough.</p>
+
+<h3>
+<a name="bezier" class="anchor" href="#bezier"><span class="octicon octicon-link"></span></a>Bezier</h3>
+
+<p>I've been refactoring bezier curve functions for years now. This was the last (and, I think, final) attempt. It supports linear, cubic and quadratic curves and supports point data (getting the value of x,y at a given % along the curve) - which can come in css, object or array flavours - and finding the value of Y at X, which is based on building a lookup table with a definable number of samples.</p>
+
+<div class="highlight highlight-js"><pre><span class="kd">var</span> <span class="nx">curve</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'bezier'</span><span class="p">)();</span>
+<span class="nx">curve</span>
+  <span class="p">.</span><span class="nx">c1</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span><span class="mi">15</span><span class="p">])</span>
+  <span class="p">.</span><span class="nx">c2</span><span class="p">([</span><span class="mi">20</span><span class="p">,</span><span class="mi">25</span><span class="p">])</span>
+  <span class="p">.</span><span class="nx">c3</span><span class="p">([</span><span class="mi">30</span><span class="p">,</span><span class="mi">35</span><span class="p">])</span>
+  <span class="p">.</span><span class="nx">c4</span><span class="p">([</span><span class="mi">40</span><span class="p">,</span><span class="mi">45</span><span class="p">])</span>
+<span class="nx">curve</span><span class="p">.</span><span class="nx">point</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span>
+<span class="c1">// {x : 11.5625, y : 20.625 }</span>
+<span class="nx">curve</span>
+  <span class="p">.</span><span class="nx">buildLookup</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">findYAtX</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+
+<p><a href="https://github.com/CharlotteGore/bezier">Bezier</a><br>
+Covered by tests? <strong>Yes</strong></p>
+
+<h3>
+<a name="dollar" class="anchor" href="#dollar"><span class="octicon octicon-link"></span></a>Dollar</h3>
+
+<p>A ridiculously tiny DOM manipulation module that does about 80% of the stuff I use jQuery for, appending elements, adding classes. No selector engine. It was written for a project where size was the most important factor.</p>
+
+<div class="highlight highlight-js"><pre><span class="kd">var</span> <span class="nx">$</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'dollar'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">myElement</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">getById</span><span class="p">(</span><span class="s1">'someid'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">div</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">'div'</span><span class="p">);</span>
+<span class="nx">myElement</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">div</span><span class="p">);</span>
+<span class="nx">div</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+  <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+<span class="p">})</span>
+</pre></div>
+
+<p><a href="https://github.com/CharlotteGore/bezier">Dollar</a><br>
+Covered by tests? <strong>Yes</strong></p>
+
+<h3>
+<a name="page-visibility" class="anchor" href="#page-visibility"><span class="octicon octicon-link"></span></a>Page Visibility</h3>
+
+<p>Cross browser page visibility helper. Uses HTML5's PageVisibility API where it can and falls back to less reliable focus/blur stuff.</p>
+
+<div class="highlight highlight-js"><pre><span class="kd">var</span> <span class="nx">pageVis</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'page-visibility'</span><span class="p">);</span>
+<span class="nx">pageVis</span><span class="p">.</span><span class="nx">onVisible</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+  <span class="c1">// do some work here..</span>
+<span class="p">})</span>
+<span class="nx">pageVis</span><span class="p">.</span><span class="nx">onHidden</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+  <span class="c1">// some other work here</span>
+<span class="p">})</span>
+</pre></div>
+
+<p><a href="https://github.com/CharlotteGore/page-visibility">Page-Visibility</a><br>
+Covered by tests? No. I couldn't figure out how I was supposed to test this other than by hand.</p>
+
+<h3>
+<a name="detect-transition" class="anchor" href="#detect-transition"><span class="octicon octicon-link"></span></a>Detect Transition</h3>
+
+<p>Simple module to return the browser specific CSS strings for Transition and Timing functions or false if they're not supported, useful if you're writing an animation library that wants to do animations using native CSS where supported.</p>
+
+<div class="highlight highlight-js"><pre><span class="nx">require</span><span class="p">(</span><span class="s1">'detect-transition'</span><span class="p">).</span><span class="nx">transition</span>
+<span class="o">&gt;</span> <span class="s2">"WebKitTransition"</span>
+<span class="nx">require</span><span class="p">(</span><span class="s1">'detect-transition'</span><span class="p">).</span><span class="nx">timingFunction</span>
+<span class="o">&gt;</span> <span class="s2">"WebKitTransitionTimingFunction"</span>
+</pre></div>
+
+<p><a href="https://github.com/CharlotteGore/detect-transition">Detect transition</a><br>
+Covered by tests? No. It needs testing by hand in each browser.</p>
+
+<h3>
+<a name="parse-duration" class="anchor" href="#parse-duration"><span class="octicon octicon-link"></span></a>Parse Duration</h3>
+
+<p>Turns human friendly duration strings into computer friendly counts of milliseconds. Supports ms, s, m, h, d and w. </p>
+
+<div class="highlight highlight-js"><pre><span class="kd">var</span> <span class="nx">parse</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'parse-duration'</span><span class="p">);</span>
+<span class="nx">parse</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+<span class="o">&gt;</span> <span class="mi">1000</span>
+<span class="nx">parse</span><span class="p">(</span><span class="s1">'100ms'</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="mi">100</span>
+<span class="nx">parse</span><span class="p">(</span><span class="s1">'100s'</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="mi">6000000</span><span class="p">..</span> 
+</pre></div>
+
+<p><a href="https://github.com/CharlotteGore/parse-duration">Parse duration</a><br>
+Covered by tests? <strong>Yes</strong></p>
+
+<h3>
+<a name="gather" class="anchor" href="#gather"><span class="octicon octicon-link"></span></a>Gather</h3>
+
+<p>Batch processing for asynchronous tasks. Get a callback for when a bunch of other async callbacks are done. This module is a bit of an old workhorse really. One of the first modules I wrote where I really cared passionately about the API.</p>
+
+<pre><code>var gathering = require('gather').gathering();
+
+gathering.task(function(done, error){
+  setTimeout(function(){
+    // do some work..
+    done();
+  }, 1000)
+});
+gathering.task(function(done, error){
+  setTimeout(function(){
+    // do some different work.
+    done();
+  }, 500)
+});
+gathering.update(function( percent ){
+  // every time a task is 'done' I get the percent
+  // done here!
+})
+gathering.run(function(errors){
+  //errors is an array of any errors, otherwise they're all done now.
+}, 2000) // add a time limit
+</code></pre>
+
+<p><a href="https://github.com/CharlotteGore/gather">Gather</a><br>
+Covered by tests? <strong>Yes</strong></p>
+
+<pre><code>$ cd your_repo_root/repo_name
+$ git fetch origin
+$ git checkout gh-pages
+</code></pre>
+
+<h3>
+<a name="vector2d" class="anchor" href="#vector2d"><span class="octicon octicon-link"></span></a>Vector2D</h3>
+
+<p>A 2D Vector library. Just because. I don't think I've ever actually used this. I was reading a book, The Mathematics of 3D Games Programming, and I thought I'd try applying what I'd learnt about vector math.</p>
+
+<p>If it does one original thing, it has the optional ability to return vectors as CSS objects, i.e, <code>{left : n, top : n}</code> which can be handy for dumping output straight into <code>.css(vector)</code> etc.</p>
+
+<p><a href="https://github.com/CharlotteGore/vector2d">Vector2D</a><br>
+Covered by tests? <strong>Yes</strong></p>
+
+<h3>
+<a name="aabb" class="anchor" href="#aabb"><span class="octicon octicon-link"></span></a>AABB</h3>
+
+<p>Axis Aligned Bounding Box library. Like the Vector library, it has has handy optional CSS object generation, i.e, <code>{ left: n, top : n, width : n, height : n}</code>. It's mathematical models of boxes. Pretty dull.</p>
+
+<p><a href="https://github.com/CharlotteGore/aabb">AABB</a><br>
+Covered by tests? <strong>Yes</strong></p>
+
+<h3>
+<a name="hashchange" class="anchor" href="#hashchange"><span class="octicon octicon-link"></span></a>Hashchange</h3>
+
+<p>A simple hashchange event module.</p>
+
+<p><a href="https://github.com/CharlotteGore/hashchange">Hashchange</a><br>
+Covered by tests? <strong>No</strong></p>
+
+<h3>
+<a name="measure" class="anchor" href="#measure"><span class="octicon octicon-link"></span></a>Measure</h3>
+
+<p>An element measuring module. Totally redundant if you're using jQuery, obviously.</p>
+
+<p><a href="https://github.com/CharlotteGore/measure">Measure</a><br>
+Covered by tests? No. Sad face.</p>
+
+<h3>
+<a name="draggy" class="anchor" href="#draggy"><span class="octicon octicon-link"></span></a>Draggy</h3>
+
+<p>Make an element draggable. No jQuery dependency and works in everything from IE7 up. I didn't really have any idea how on earth to test this other than manually when I wrote this.</p>
+
+<p>If I revisited this module, I'd use Matrix3DTranform stuff if available rather than 'position:absolute' to move objects around in their own render layer. And add tests using simulated mouse click events.</p>
+
+<p><a href="https://github.com/CharlotteGore/draggy">Draggy</a><br>
+Covered by tests? No</p>
+
+<h3>
+<a name="orderable" class="anchor" href="#orderable"><span class="octicon octicon-link"></span></a>Orderable</h3>
+
+<p>Using Draggy, it makes an Unordered list re-orderable by drag and drop, with an intimidating API for you to fear and use to do whatever processing you feel necessary. </p>
+
+<p>This is, it has to be said, the module I am the least proud of. Because I couldn't figure out how to test 'draggy' I also couldn't figure out how to test this, for the same reason. </p>
+
+<p>It is, however, being used in the actual wild and seems stable enough. </p>
+
+<div class="highlight highlight-js"><pre><span class="kd">var</span> <span class="nx">someArray</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'one'</span><span class="p">,</span> <span class="s1">'two'</span><span class="p">,</span> <span class="s1">'three'</span><span class="p">,</span> <span class="s1">'four'</span><span class="p">]</span>
+
+<span class="nx">orderable</span><span class="p">.</span><span class="nx">onReorder</span><span class="p">(</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">uniqueItemKey</span><span class="p">,</span> <span class="nx">oldIndex</span><span class="p">,</span> <span class="nx">newIndex</span><span class="p">,</span> <span class="nx">helperFunction</span> <span class="p">){</span> 
+    <span class="c1">// apply the same tranformation to some array...</span>
+    <span class="nx">someArray</span> <span class="o">=</span> <span class="nx">helperFunction</span><span class="p">(</span> <span class="nx">someArray</span> <span class="p">);</span>
+
+    <span class="c1">// someArray === ['two', 'three', 'one', 'four']</span>
+<span class="p">})</span>
+</pre></div>
+
+<p><a href="https://github.com/CharlotteGore/orderable">Orderable</a><br>
+Covered by tests? <strong>Yes</strong></p>
+
+<h2>
+<a name="apps" class="anchor" href="#apps"><span class="octicon octicon-link"></span></a>"Apps"</h2>
+
+<p>Turns out I've actually got very few actual full applications in my own Github account.</p>
+
+<h3>
+<a name="monome" class="anchor" href="#monome"><span class="octicon octicon-link"></span></a>Monome</h3>
+
+<p>This was basically a hack to have a play with the Web Audio API and CSS3 animations. <a href="http://charlottegore.com/monome">Make beautiful music</a>. The code is a little gnarly, as you might expect for a hack. It makes extensive use of many of the Components listed above. </p>
+
+<p><a href="https://github.com/CharlotteGore/Monome">Monome</a><br>
+Covered by tests? No</p>
+
+<h3>
+<a name="real-time-interactive-js-ide" class="anchor" href="#real-time-interactive-js-ide"><span class="octicon octicon-link"></span></a>Real Time Interactive JS IDE</h3>
+
+<p>This was a hilarious gag for a Developer Led training session. I hacked a pseudo-real time web based IDE together (using ACE), so that I could demonstrate various features of Javascript to other developers without switching between source code and the output. Everything was in one page. As I changed things in the source, it would update the output immediately. Just to make sure it was complete overkill changes to the source were transmitted to the server over socket.io as diff patches rather than sending the whole file. Just because.</p>
+
+<p>Far too afraid to look at the source for this. It's from my pre-module days when everything was about extending objects and object prototypes, data was just data and everything was co-ordinated using a pub/sub module.</p>
+
+<p><a href="https://github.com/CharlotteGore/Real-Time-Interactive-JS-IDE">RTIJSIDE</a><br>
+Covered by tests? No</p>
+
+<h2>
+<a name="component-tools" class="anchor" href="#component-tools"><span class="octicon octicon-link"></span></a> Component tools</h2>
+
+<h3>
+<a name="flatinator" class="anchor" href="#flatinator"><span class="octicon octicon-link"></span></a>Flatinator</h3>
+
+<p>Hopefully this is soon to be redundant, but it transforms the build output from Component to a simple flat single level structure doing away with the need for require.alias calls, reducing the file size before and after minification. Totally unnecessary if you've got gzip on your server, but may speed up JS parsing anyway.</p>
+
+<p><a href="https://github.com/CharlotteGore/Flatinator">Flatinator</a><br>
+Covered by tests: To my shame, no. </p>
+
+<h2>
+<a name="dusty-old-stuff" class="anchor" href="#dusty-old-stuff"><span class="octicon octicon-link"></span></a>Dusty Old Stuff</h2>
+
+<p>This is JS I wrote before I started writing in modules. They're listed here more for historical reasons.</p>
+
+<h3>
+<a name="planet" class="anchor" href="#planet"><span class="octicon octicon-link"></span></a>Planet</h3>
+
+<p>When I was writing the UI for <a href="http://pathways.nice.org.uk/pathways/attention-deficit-hyperactivity-disorder">Pathways</a> I needed to write a tiny, minimalist Vector graphics library that would output VML, SVG or Canvas from a standardised input. I found various CSS3 polyfills to be unacceptable in terms of performance, and other Vector graphics libs too over featured and bloated.</p>
+
+<p>Planet was... well, tiny but useful. It only supported a few vector primitives - boxes with rounded edges, lines etc. </p>
+
+<p>This was written when I was still doing 'object style' JS, inspired by the way jQuery is programmed. Planet is built by extending the Planet object and the Planet's prototype object, and instead of a cool fluent interface it just takes a giant uncomprehensible splurge of JSON data.</p>
+
+<p>I've learnt a lot since writing this.</p>
+
+<p><a href="https://github.com/CharlotteGore/Planet">Planet</a><br>
+Covered by tests: No. How to you test Canvas output?</p>
+
+<h3>
+<a name="cassette-express" class="anchor" href="#cassette-express"><span class="octicon octicon-link"></span></a>Cassette-Express</h3>
+
+<p>One of my clients used Cassette (a .net nuget package) quite extensively to manage their Javascript assets. We used it to assemble random bits of javascript into bundles, sort of a naive old-school way of breaking large Javascript applications into separate files. It especially suits the Object style of Javascript programming where you have one global variable, your namespace, and each file extends that object in some way, and your third party dependencies are just random javascript files you want to insert in the page.</p>
+
+<p>Cassette-Express was a port of this to node, with the idea that instead of assembling bundles as a build step, it can be done at run time instead. </p>
+
+<p>I spent absolutely ages writing code to read and resolve dependencies to get this working, and it was, I think, a total triumph. Except almost immediately after finishing it I moved over to using Component as a package manager and writing in module style instead. </p>
+
+<p>It possibly still has some real world use for people who absolutely refuse to write the JS as modules and use Component or Browserify. </p>
+
+<p><a href="https://github.com/CharlotteGore/Cassette-Express">Cassette-Express</a><br>
+Covered by tests: <strong>Yes</strong></p>
+
+<h2>
+<a name="arduino-junk" class="anchor" href="#arduino-junk"><span class="octicon octicon-link"></span></a>Arduino Junk</h2>
+
+<h3>
+<a name="sidi-mos6581-and-sidfreak" class="anchor" href="#sidi-mos6581-and-sidfreak"><span class="octicon octicon-link"></span></a>SIDI, MOS6581 and SIDFreak</h3>
+
+<p>Some C++(esque) code for controlling the Commodore 64's utterly delicious sound chip, the MOS6581 or the SID as it's more commonly known. Lots of information about the overall project in those repos. </p>
+
+<p><a href="https://github.com/CharlotteGore/SIDI">SIDI</a><br>
+Covered by tests? lol</p>
+
+<p><a href="https://github.com/CharlotteGore/MOS6581">MOS6581</a><br>
+Covered by tests? lol</p>
+
+<p><a href="https://github.com/CharlotteGore/SIDFreak">SIDFreak</a><br>
+Covered by tests? lol</p>
+      </section>
+
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
