@@ -226,28 +226,28 @@ Covered by tests? <strong>Yes</strong></p>
 
 <p>Batch processing for asynchronous tasks. Get a callback for when a bunch of other async callbacks are done. This module is a bit of an old workhorse really. One of the first modules I wrote where I really cared passionately about the API.</p>
 
-<pre><code>var gathering = require('gather').gathering();
+<div class="highlight highlight-js"><pre><span class="kd">var</span> <span class="nx">gathering</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'gather'</span><span class="p">).</span><span class="nx">gathering</span><span class="p">();</span>
 
-gathering.task(function(done, error){
-  setTimeout(function(){
-    // do some work..
-    done();
-  }, 1000)
-});
-gathering.task(function(done, error){
-  setTimeout(function(){
-    // do some different work.
-    done();
-  }, 500)
-});
-gathering.update(function( percent ){
-  // every time a task is 'done' I get the percent
-  // done here!
-})
-gathering.run(function(errors){
-  //errors is an array of any errors, otherwise they're all done now.
-}, 2000) // add a time limit
-</code></pre>
+<span class="nx">gathering</span><span class="p">.</span><span class="nx">task</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">done</span><span class="p">,</span> <span class="nx">error</span><span class="p">){</span>
+  <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="c1">// do some work..</span>
+    <span class="nx">done</span><span class="p">();</span>
+  <span class="p">},</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="p">});</span>
+<span class="nx">gathering</span><span class="p">.</span><span class="nx">task</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">done</span><span class="p">,</span> <span class="nx">error</span><span class="p">){</span>
+  <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="c1">// do some different work.</span>
+    <span class="nx">done</span><span class="p">();</span>
+  <span class="p">},</span> <span class="mi">500</span><span class="p">)</span>
+<span class="p">});</span>
+<span class="nx">gathering</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span> <span class="nx">percent</span> <span class="p">){</span>
+  <span class="c1">// every time a task is 'done' I get the percent</span>
+  <span class="c1">// done here!</span>
+<span class="p">})</span>
+<span class="nx">gathering</span><span class="p">.</span><span class="nx">run</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">errors</span><span class="p">){</span>
+  <span class="c1">//errors is an array of any errors, otherwise they're all done now.</span>
+<span class="p">},</span> <span class="mi">2000</span><span class="p">)</span> <span class="c1">// add a time limit</span>
+</pre></div>
 
 <p><a href="https://github.com/CharlotteGore/gather">Gather</a><br>
 Covered by tests? <strong>Yes</strong></p>
